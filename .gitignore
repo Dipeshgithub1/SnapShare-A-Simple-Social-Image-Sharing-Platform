@@ -22,6 +22,7 @@
 
 # misc
 .DS_Store
+Thumbs.db
 *.pem
 
 # debug
@@ -39,3 +40,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# editor settings
+.vscode/
+.idea/
+
+# turbo repo / nx / monorepo tools (optional)
+.turbo/
+dist/
