@@ -10,12 +10,10 @@ export async function GET() {
          
      })
  
-     return Response.json({ 
-         authenticationParameters,
-         publicKey: process.env.NEXT_PUBLIC_PUBLIC_KEY
-     });
+     return Response.json(authenticationParameters)
  }
     catch (error) {
+        console.error("ImageKit auth error:", error);
     return Response.json(
         {
          error: "Authentication fot Imagekit failed",

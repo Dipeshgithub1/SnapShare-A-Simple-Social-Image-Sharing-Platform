@@ -22,13 +22,19 @@ const FileUpload = ({ onSuccess, onProgress, fileType }: FileUploadProps) => {
   //optional validation
 
   const validateFile = (file: File) => {
-    if (fileType === "video") {
-      if (!file.type.startsWith("video/")) {
+    if (fileType === "video" && !file.type.startsWith("video/")){
+     
         setError("Please upload a valid video file");
-      }
+        return false;
+      
+    }
+    if (fileType === "image" && !file.type.startsWith("image/")) {
+      setError("Please upload a valid image file");
+      return false;
     }
     if (file.size > 100 * 1024 * 1024) {
       setError("File size must be less than 100 MB");
+      return false;
     }
     return true
   };
