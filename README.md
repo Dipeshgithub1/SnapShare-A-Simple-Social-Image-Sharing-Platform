@@ -56,14 +56,13 @@ IMAGEKIT_PUBLIC_KEY=your_public_key
 IMAGEKIT_PRIVATE_KEY=your_private_key
 IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your_imagekit_id/
 📚 Useful Resources
-Next.js Documentation
+📘 Next.js Documentation
 
-NextAuth Docs
+🔐 NextAuth Documentation
 
-MongoDB Atlas
+🗃️ MongoDB Atlas
 
-ImageKit Docs
-
+🖼️ ImageKit Documentation
 🚀 Deployment
 Deploy easily using Vercel. Just connect your GitHub repo and add your .env variables in the Vercel dashboard.
 
