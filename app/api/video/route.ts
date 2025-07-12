@@ -5,6 +5,7 @@ import { error } from "console";
 import { request } from "http";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
+import { title } from "process";
 
 
 
@@ -12,11 +13,8 @@ export async function GET(){
     try {
         await connectToDatabase();
      const videos =  await Video.find({}).sort({createdAt: -1 }).lean()
-
-        if(!videos || videos.length === 0){
-             return NextResponse.json([],{status: 200})
-        }
-        return NextResponse.json(videos)
+        return NextResponse.json( videos || [],{status: 200})
+           
     } catch (error) {
         return NextResponse.json(
             {
@@ -28,7 +26,7 @@ export async function GET(){
 
 export async function POST(request: NextRequest){
   try {
-  const session =  getServerSession(authOptions)
+  const session =  await getServerSession(authOptions)
   if(!session){
     return NextResponse.json(
         { error: "Unauthorized"},
@@ -36,13 +34,9 @@ export async function POST(request: NextRequest){
   }
   await connectToDatabase();
   const body : IVideo = await request.json();
-  if(
-     !body.title ||
-     !body.description ||
-     !body.videoUrl ||
-     !body.thumbnailUrl
 
-   ){
+  const {title,description,videoUrl,thumbnailUrl} = body;
+  if(!title || !description || !videoUrl || !thumbnailUrl){
     return NextResponse.json(
         { error: "Missing required fields"},
         {status: 400}
@@ -53,14 +47,15 @@ export async function POST(request: NextRequest){
     ...body,
     controls: body?.controls ?? true,
     transformation: {
-         height: 1920,
-         width: 1080,
+         height:body.transformation?.height ?? 1920,
+         width: body.transformation?.width ?? 1080,
          quality: body.transformation?.quality ?? 100
     },
   };
  const newVideo = await Video.create(videoData)
   return NextResponse.json(newVideo, {status: 201})
   } catch (error) {
+     console.error("POST /api/video error:", error);
     return NextResponse.json(
         {error: "Failed to create video"},
         {status: 500})

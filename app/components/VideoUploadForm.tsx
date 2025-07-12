@@ -17,7 +17,7 @@ export default function VideoUploadForm() {
     const formData = new FormData(form);
 
     try {
-      const res = await fetch("/api/video/upload", {
+      const res = await fetch("/api/videos/upload", {
         method: "POST",
         body: formData,
       });
@@ -46,35 +46,41 @@ export default function VideoUploadForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-4"
+      className="space-y-6 bg-white dark:bg-gray-900 shadow-lg rounded-xl p-8"
       encType="multipart/form-data"
     >
       <div>
-        <label className="block font-semibold">Title</label>
+        <label className="block font-semibold text-gray-800 dark:text-gray-200">
+          🎬 Title
+        </label>
         <input
           name="title"
           type="text"
-          className="border p-2 w-full"
+          className="mt-1 w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
           required
         />
       </div>
 
       <div>
-        <label className="block font-semibold">Description</label>
+        <label className="block font-semibold text-gray-800 dark:text-gray-200">
+          📝 Description
+        </label>
         <textarea
           name="description"
-          className="border p-2 w-full"
+          className="mt-1 w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
           required
         />
       </div>
 
       <div>
-        <label className="block font-semibold">Video File</label>
+        <label className="block font-semibold text-gray-800 dark:text-gray-200">
+          📁 Upload Video
+        </label>
         <input
           name="file"
           type="file"
           accept="video/*"
-          className="border p-2 w-full"
+          className="mt-1 w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
           required
         />
       </div>
@@ -82,19 +88,21 @@ export default function VideoUploadForm() {
       <button
         type="submit"
         disabled={loading}
-        className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+        className={`w-full px-4 py-2 font-semibold rounded-md text-white ${
+          loading ? "bg-indigo-400 cursor-not-allowed" : "bg-indigo-600 hover:bg-indigo-700"
+        }`}
       >
-        {loading ? "Publishing..." : "Publish Video"}
+        {loading ? "Publishing..." : "🚀 Publish Video"}
       </button>
 
       {error && (
-        <p className="text-red-600 font-medium mt-4">
+        <p className="text-red-600 dark:text-red-400 font-medium mt-4">
           ❌ {error}
         </p>
       )}
 
       {response && (
-        <pre className="bg-gray-100 p-4 mt-4 overflow-x-auto">
+        <pre className="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 p-4 mt-4 rounded-md overflow-x-auto">
           {typeof response === "string"
             ? response
             : JSON.stringify(response, null, 2)}

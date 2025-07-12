@@ -67,7 +67,7 @@ const FileUpload = ({ onSuccess, onProgress, fileType }: FileUploadProps) => {
         
       });
       onSuccess(res)
-    } catch (error) {
+    } catch (error : any) {
         console.error("Upload failed", error)
     } finally {
         setUploading(false)
@@ -82,6 +82,7 @@ const FileUpload = ({ onSuccess, onProgress, fileType }: FileUploadProps) => {
         onChange={handleFileChange}
       />
       {uploading && <span>Loading....</span>}
+      {error && <p className="text-red-500 text-sm">{error}</p>}
     </>
   );
 };

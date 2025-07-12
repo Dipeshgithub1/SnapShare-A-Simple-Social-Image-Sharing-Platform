@@ -82,10 +82,9 @@ export default function Header(){
                   <User className="w-5 h-5" />
                 )}
               </div>
-              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-                 <ul tabIndex={0}
+             <ul
                  className="mt-3 z=[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-                 {session ? (
+                  {session ? (
                     <>
                     <li className="px-4 py-1">
                       <span className="text-sm opacity-70">
@@ -118,7 +117,7 @@ export default function Header(){
                     onClick={() => 
                         showNotification("Please sign in to continue","info")
                     }>
-                    Login
+                    login
                     </Link>
                     </li>
                  

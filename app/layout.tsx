@@ -35,10 +35,10 @@ export default function RootLayout({
           text-white
         `}
       >
-        <Providers >
+        <Providers>
 
         {children}
-        </Providers >
+        </Providers>
       </body>
     </html>
   );

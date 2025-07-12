@@ -20,6 +20,7 @@ import Link from "next/link";
         email,
         password,
         redirect: false,
+        callbackUrl:"/"
      })
      if(result?.error){
         console.log(result.error)

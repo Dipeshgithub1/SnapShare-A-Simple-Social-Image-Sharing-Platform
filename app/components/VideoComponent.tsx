@@ -17,7 +17,7 @@ export default function VideoUploadForm() {
     const formData = new FormData(form);
 
     try {
-      const res = await fetch("/api/video/upload", {
+      const res = await fetch("/api/upload", {
         method: "POST",
         body: formData,
       });
@@ -49,12 +49,13 @@ export default function VideoUploadForm() {
       className="space-y-4"
       encType="multipart/form-data"
     >
+       <h2 className="text-xl font-bold">📤 Upload a Video</h2>
       <div>
         <label className="block font-semibold">Title</label>
         <input
           name="title"
           type="text"
-          className="border p-2 w-full"
+          className="border border-gray-300 p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-green-400"
           required
         />
       </div>
@@ -63,7 +64,7 @@ export default function VideoUploadForm() {
         <label className="block font-semibold">Description</label>
         <textarea
           name="description"
-          className="border p-2 w-full"
+          className="border border-gray-300 p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-green-400"
           required
         />
       </div>
