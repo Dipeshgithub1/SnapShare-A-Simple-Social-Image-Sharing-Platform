@@ -1,41 +1,83 @@
+# 📸 SnapShare – Social Image Sharing App
 
-# SnapShare-A-Simple-Social-Image-Sharing-Platform
-📸 SnapShare is a simple social image sharing platform where users can:  🔐 Register/Login  📤 Upload images with captions (stored via ImageKit)  🌐 View all shared posts (fetched from MongoDB)  ⚡ Built with Next.js, NextAuth, MongoDB, and ImageKit
-=======
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+**SnapShare** is a simple social image-sharing web app where users can sign in, upload images, and view posts shared by others. It's built with **Next.js App Router**, **MongoDB**, **NextAuth**, and **ImageKit**.
 
-## Getting Started
+---
 
-First, run the development server:
+## 🔥 Features
+
+- ✅ **User Authentication** – Secure login system using **NextAuth**
+- 🖼️ **Image Upload** – Upload and store images with **ImageKit**
+- 🧾 **Captions** – Add text captions to your images
+- 🌍 **Feed** – Explore a feed of uploaded posts
+- 🌐 **Modern Stack** – Fast and optimized with the Next.js App Router
+
+---
+
+## ⚙️ Tech Stack
+
+- **Framework:** Next.js 14 (App Router)
+- **Authentication:** NextAuth
+- **Database:** MongoDB (with Mongoose)
+- **Image Storage:** ImageKit.io
+- **Styling:** Tailwind CSS
+
+---
+
+## 🚀 Getting Started
+
+First, install dependencies:
 
 ```bash
+npm install
+Then, run the development server:
+
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Open your browser and go to:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+http://localhost:3000
+You can start editing the app at:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+app/page.tsx
+The app will reload automatically as you make changes.
 
-## Learn More
+🔐 Environment Variables
+Create a .env.local file and add the following variables:
 
-To learn more about Next.js, take a look at the following resources:
+env
+MONGODB_URI=your_mongodb_connection_string
+NEXTAUTH_SECRET=your_auth_secret
+NEXTAUTH_URL=http://localhost:3000
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+IMAGEKIT_PUBLIC_KEY=your_public_key
+IMAGEKIT_PRIVATE_KEY=your_private_key
+IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your_imagekit_id/
+📚 Useful Resources
+Next.js Documentation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+NextAuth Docs
 
-## Deploy on Vercel
+MongoDB Atlas
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+ImageKit Docs
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
->>>>>>> 1e27bd3 (Initial commit from Create Next App)
+🚀 Deployment
+Deploy easily using Vercel. Just connect your GitHub repo and add your .env variables in the Vercel dashboard.
+
+Read full deployment guide here:
+👉 Next.js Deployment Docs
+
+🙌 Author
+Made with ❤️ by Dipesh Kumar
+
+Let me know if you also want:
+
+- Badges (e.g. Made with Next.js, License)
+- Screenshots section
+- Contribution guidelines
+- Demo link
+
+Just say the word!
