@@ -72,6 +72,20 @@ export default function Header(){
             </button>
               {/* Dropdown */}
                 {/* Dropdown */}
+            
+              {session ? (
+                <button
+                  onClick={handleSignOut}
+                  className="btn btn-sm btn-outline btn-error"
+                >
+                  Sign Out
+                </button>
+              ) : (
+                <Link href="/login" className="btn btn-sm btn-primary">
+                  Login
+                </Link>
+              )}
+
             <div className="dropdown dropdown-end">
               <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                 {session?.user?.image ? (
@@ -110,16 +124,7 @@ export default function Header(){
                         </button>
                         </li>
                     </>
-                 ):(
-                    <li>
-                    <Link href="/login"
-                    className="px-4 py-2 hover:bg-base-200 block w-full"
-                    onClick={() => 
-                        showNotification("Please sign in to continue","info")
-                    }>
-                    login
-                    </Link>
-                    </li>
+                 ):(null
                  
                  )}         
                  </ul>

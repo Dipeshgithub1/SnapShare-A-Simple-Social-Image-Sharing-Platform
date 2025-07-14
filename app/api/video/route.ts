@@ -47,9 +47,9 @@ export async function POST(request: NextRequest){
     ...body,
     controls: body?.controls ?? true,
     transformation: {
-         height:body.transformation?.height ?? 1920,
-         width: body.transformation?.width ?? 1080,
-         quality: body.transformation?.quality ?? 100
+           height:body.transformation?.height ?? 1920,
+           width: body.transformation?.width ?? 1080,
+           quality: body.transformation?.quality ?? 100
     },
   };
  const newVideo = await Video.create(videoData)

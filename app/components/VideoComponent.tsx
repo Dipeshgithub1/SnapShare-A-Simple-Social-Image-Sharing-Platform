@@ -1,106 +1,54 @@
 "use client";
 
+import { IVideo } from "@/models/Video";
+import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
-export default function VideoUploadForm() {
-  const [loading, setLoading] = useState(false);
-  const [response, setResponse] = useState<any>(null);
-  const [error, setError] = useState<string | null>(null);
+export default function VideoComponent({
+  _id,
+  title,
+  description,
+  videoUrl,
+  thumbnailUrl,
+}: IVideo) {
+  const [showVideoFallback, setShowVideoFallback] = useState(false);
+  const isVideo = thumbnailUrl?.endsWith(".mp4") || videoUrl.endsWith(".mp4");
+  const finalThumbnailUrl = isVideo && !thumbnailUrl?.includes("?tr=f-image")
+    ? `${videoUrl}?tr=f-image`
+    : thumbnailUrl;
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-    setResponse(null);
-
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-
-    try {
-      const res = await fetch("/api/upload", {
-        method: "POST",
-        body: formData,
-      });
-
-      const contentType = res.headers.get("content-type");
-
-      if (!res.ok) {
-        const errorText = await res.text();
-        throw new Error(`Upload failed: ${res.status} ${errorText}`);
-      }
-
-      const data = contentType?.includes("application/json")
-        ? await res.json()
-        : await res.text();
-
-      setResponse(data);
-      console.log("Upload success:", data);
-    } catch (err: any) {
-      console.error("Upload failed:", err);
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  console.log("VideoComponent - finalThumbnailUrl:", finalThumbnailUrl);
+  console.log("VideoComponent - videoUrl:", videoUrl);
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="space-y-4"
-      encType="multipart/form-data"
-    >
-       <h2 className="text-xl font-bold">📤 Upload a Video</h2>
-      <div>
-        <label className="block font-semibold">Title</label>
-        <input
-          name="title"
-          type="text"
-          className="border border-gray-300 p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-green-400"
-          required
-        />
-      </div>
-
-      <div>
-        <label className="block font-semibold">Description</label>
-        <textarea
-          name="description"
-          className="border border-gray-300 p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-green-400"
-          required
-        />
-      </div>
-
-      <div>
-        <label className="block font-semibold">Video File</label>
-        <input
-          name="file"
-          type="file"
-          accept="video/*"
-          className="border p-2 w-full"
-          required
-        />
-      </div>
-
-      <button
-        type="submit"
-        disabled={loading}
-        className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-      >
-        {loading ? "Publishing..." : "Publish Video"}
-      </button>
-
-      {error && (
-        <p className="text-red-600 font-medium mt-4">
-          ❌ {error}
-        </p>
-      )}
-
-      {response && (
-        <pre className="bg-gray-100 p-4 mt-4 overflow-x-auto">
-          {typeof response === "string"
-            ? response
-            : JSON.stringify(response, null, 2)}
-        </pre>
-      )}
-    </form>
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl">
+      <Link href={`/video/${_id}`}>
+        <div className="relative w-full aspect-video">
+          {finalThumbnailUrl && !showVideoFallback ? (
+            <Image
+              src={finalThumbnailUrl}
+              alt={title}
+              fill
+              className="rounded-t-lg object-cover"
+              onError={() => setShowVideoFallback(true)}
+            />
+          ) : (
+            <video
+              src={videoUrl}
+              controls
+              className="w-full h-full object-cover rounded-t-lg"
+            />
+          )}
+        </div>
+        <div className="p-4">
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white truncate">
+            {title}
+          </h3>
+          <p className="text-sm text-gray-700 dark:text-gray-300 mt-1 line-clamp-2">
+            {description}
+          </p>
+        </div>
+      </Link>
+    </div>
   );
 }

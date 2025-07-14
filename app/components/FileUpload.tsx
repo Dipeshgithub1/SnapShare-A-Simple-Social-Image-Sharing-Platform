@@ -18,6 +18,7 @@ interface FileUploadProps {
 const FileUpload = ({ onSuccess, onProgress, fileType }: FileUploadProps) => {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [progress, setProgress] = useState(0);
 
   //optional validation
 
@@ -62,11 +63,37 @@ const FileUpload = ({ onSuccess, onProgress, fileType }: FileUploadProps) => {
           if(event.lengthComputable && onProgress){
             const percent = (event.loaded / event.total) * 100;
             onProgress(Math.round(percent))
+            setProgress(Math.round(percent));
           }
         },
         
       });
-      onSuccess(res)
+
+      console.log("ImageKit raw res.url:", res.url);
+
+      // Helper function to remove query parameters from a URL
+      const cleanUrl = (url: string) => {
+        const urlObj = new URL(url);
+        urlObj.search = ''; // Remove all query parameters
+        return urlObj.toString();
+      };
+
+      const baseVideoOrImageUrl = cleanUrl(res.url!);
+      console.log("ImageKit cleaned base URL:", baseVideoOrImageUrl);
+
+      let generatedThumbnailUrl = baseVideoOrImageUrl;
+
+      if (fileType === "video") {
+        // Construct thumbnail URL from video URL using f-image transformation
+        generatedThumbnailUrl = `${baseVideoOrImageUrl}?tr=f-image`;
+      } else {
+        // For images, use the clean base URL directly without any additional transformations
+        generatedThumbnailUrl = baseVideoOrImageUrl;
+      }
+
+      console.log("Generated thumbnail URL:", generatedThumbnailUrl);
+      console.log("Cleaned video/image URL:", baseVideoOrImageUrl);
+      onSuccess({...res, thumbnailUrl: generatedThumbnailUrl, videoUrl: baseVideoOrImageUrl});
     } catch (error : any) {
         console.error("Upload failed", error)
     } finally {
@@ -81,7 +108,12 @@ const FileUpload = ({ onSuccess, onProgress, fileType }: FileUploadProps) => {
         accept={fileType === "video" ? "video/*" : "image/*"}
         onChange={handleFileChange}
       />
-      {uploading && <span>Loading....</span>}
+      {uploading && (
+        <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-2">
+          <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: `${progress}%` }}></div>
+        </div>
+      )}
+      {uploading && <span className="text-sm text-gray-500 dark:text-gray-400 mt-1">Uploading... {progress}%</span>}
       {error && <p className="text-red-500 text-sm">{error}</p>}
     </>
   );
