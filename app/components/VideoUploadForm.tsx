@@ -74,7 +74,7 @@ export default function VideoUploadForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-6 bg-gray-100 dark:bg-gray-800 shadow-xl rounded-xl p-8 border border-gray-300 dark:border-gray-700 transform transition-transform duration-300 hover:scale-[1.01]"
+      className="w-full max-w-2xl mx-auto bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-8 space-y-8 border border-gray-200 dark:border-gray-700"
     >
       <div>
         <label className="block font-semibold text-lg text-gray-900 dark:text-gray-100 mb-2">
@@ -146,7 +146,7 @@ export default function VideoUploadForm() {
       )}
 
       {response && !error && (
-        <p className="text-green-600 dark:text-green-400 font-medium mt-4 p-3 bg-green-100 dark:bg-green-900 border border-green-400 dark:border-green-600 rounded-md animate-fade-in">
+        <p className="text-indigo-600 dark:text-indigo-400 font-medium mt-4 p-3 bg-indigo-100 dark:bg-indigo-900 border border-indigo-400 dark:border-green-600 rounded-md animate-fade-in">
           ✅ Video uploaded successfully! Redirecting...
         </p>
       )}

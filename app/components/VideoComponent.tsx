@@ -21,32 +21,28 @@ export default function VideoComponent({
   console.log("VideoComponent - finalThumbnailUrl:", finalThumbnailUrl);
   console.log("VideoComponent - videoUrl:", videoUrl);
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl">
-      <Link href={`/video/${_id}`}>
-        <div className="relative w-full aspect-video">
+    <div className="bg-[#232946] dark:bg-[#232946] rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-[#232946] dark:border-[#232946]">
+      <Link href={`/video/${_id}`} className="block">
+        <div className="relative w-full aspect-video bg-[#181825] dark:bg-[#181825]">
           {finalThumbnailUrl && !showVideoFallback ? (
             <Image
               src={finalThumbnailUrl}
               alt={title}
               fill
-              className="rounded-t-lg object-cover"
+              className="rounded-t-2xl object-cover"
               onError={() => setShowVideoFallback(true)}
             />
           ) : (
             <video
               src={videoUrl}
               controls
-              className="w-full h-full object-cover rounded-t-lg"
+              className="w-full h-full object-cover rounded-t-2xl"
             />
           )}
         </div>
         <div className="p-4">
-          <h3 className="text-xl font-bold text-gray-900 dark:text-white truncate">
-            {title}
-          </h3>
-          <p className="text-sm text-gray-700 dark:text-gray-300 mt-1 line-clamp-2">
-            {description}
-          </p>
+          <h3 className="text-lg font-semibold text-[#e0e6ed] dark:text-[#e0e6ed] truncate mb-1">{title}</h3>
+          <p className="text-sm text-[#b8c1ec] dark:text-[#b8c1ec] line-clamp-2">{description}</p>
         </div>
       </Link>
     </div>
