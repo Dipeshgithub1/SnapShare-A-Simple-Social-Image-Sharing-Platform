@@ -1,3 +1,10 @@
+
+
+Uploading Create Next App and 1 more page - Personal - Microsoft_ Edge 2025-07-14 18-58-31 (online-video-cutter.com) (1).mp4…
+
+
+
+
 # 📸 SnapShare – Social Image Sharing App
 
 **SnapShare** is a simple social image-sharing web app where users can sign in, upload images, and view posts shared by others. It's built with **Next.js App Router**, **MongoDB**, **NextAuth**, and **ImageKit**.
