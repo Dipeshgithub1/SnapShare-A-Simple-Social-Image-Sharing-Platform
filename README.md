@@ -1,7 +1,5 @@
 
-<img width="1897" height="830" alt="register" src="https://github.com/user-attachments/assets/d3523dcf-fcfd-4ef1-9bad-c6f08cfce325" />
-<img width="1856" height="870" alt="login" src="https://github.com/user-attachments/assets/75bb1202-870e-4b84-ad02-296b0bf84a9d" />
-<img width="1871" height="865" alt="hsij" src="https://github.com/user-attachments/assets/3f7c3064-59d7-4b6f-843d-726de8558113" />
+
 
 
 
