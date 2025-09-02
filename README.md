@@ -41,7 +41,6 @@ https://github.com/user-attachments/assets/b1fe11c2-db9f-495e-aed1-3db9a805cf28
 
 First, install dependencies:
 
-```bash
 npm install
 Then, run the development server:
 
