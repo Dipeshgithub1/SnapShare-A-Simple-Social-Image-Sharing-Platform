@@ -6,7 +6,7 @@ export default async function Home() {
   let videos: IVideo[] = [];
   try {
     const res = await fetch(`${process.env.NEXTAUTH_URL}/api/video`, {
-      cache: "no-store",
+      next: { revalidate: 60 }, // Revalidate every 60 seconds
     });
     if (!res.ok) {
       throw new Error("Failed to fetch videos");

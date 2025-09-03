@@ -7,7 +7,7 @@ export interface IUser {
     password: string;
     _id?: mongoose.Types.ObjectId;
     createdAt?: Date;
-    updateAt?: Date;
+    updatedAt?: Date;
 }
 
 const userSchema = new Schema<IUser>(

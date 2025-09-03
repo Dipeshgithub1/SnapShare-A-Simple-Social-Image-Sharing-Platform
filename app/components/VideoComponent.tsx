@@ -18,6 +18,8 @@ export default function VideoComponent({
     ? `${videoUrl}?tr=f-image`
     : thumbnailUrl;
 
+  const isImageKitVideoTransformed = finalThumbnailUrl?.includes("ik.imagekit.io") && finalThumbnailUrl?.includes("?tr=f-image");
+
   console.log("VideoComponent - finalThumbnailUrl:", finalThumbnailUrl);
   console.log("VideoComponent - videoUrl:", videoUrl);
   return (
@@ -25,13 +27,22 @@ export default function VideoComponent({
       <Link href={`/video/${_id}`} className="block">
         <div className="relative w-full aspect-video bg-[#181825] dark:bg-[#181825]">
           {finalThumbnailUrl && !showVideoFallback ? (
-            <Image
-              src={finalThumbnailUrl}
-              alt={title}
-              fill
-              className="rounded-t-2xl object-cover"
-              onError={() => setShowVideoFallback(true)}
-            />
+            isImageKitVideoTransformed ? (
+              <img
+                src={finalThumbnailUrl}
+                alt={title}
+                className="w-full h-full object-cover rounded-t-2xl"
+                onError={() => setShowVideoFallback(true)}
+              />
+            ) : (
+              <Image
+                src={finalThumbnailUrl}
+                alt={title}
+                fill
+                className="rounded-t-2xl object-cover"
+                onError={() => setShowVideoFallback(true)}
+              />
+            )
           ) : (
             <video
               src={videoUrl}

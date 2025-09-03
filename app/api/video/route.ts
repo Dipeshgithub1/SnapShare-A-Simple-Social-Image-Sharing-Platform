@@ -1,12 +1,8 @@
 import { authOptions } from "@/lib/auth";
 import { connectToDatabase } from "@/lib/db";
 import Video, { IVideo } from "@/models/Video";
-import { error } from "console";
-import { request } from "http";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import { title } from "process";
-
 
 
 export async function GET(){
@@ -33,9 +29,9 @@ export async function POST(request: NextRequest){
         {status: 401});
   }
   await connectToDatabase();
-  const body : IVideo = await request.json();
+  const body = await request.json();
 
-  const {title,description,videoUrl,thumbnailUrl} = body;
+  const {title,description,videoUrl,thumbnailUrl, controls, transformation} = body; // Explicitly extract allowed fields
   if(!title || !description || !videoUrl || !thumbnailUrl){
     return NextResponse.json(
         { error: "Missing required fields"},
@@ -43,13 +39,31 @@ export async function POST(request: NextRequest){
     )
   }
 
+  // Basic URL validation
+  const urlRegex = /^(https?:\/\/[^\s]+)$/;
+  if (!urlRegex.test(videoUrl)) {
+    return NextResponse.json(
+      { error: "Invalid video URL format" },
+      { status: 400 }
+    );
+  }
+  if (!urlRegex.test(thumbnailUrl)) {
+    return NextResponse.json(
+      { error: "Invalid thumbnail URL format" },
+      { status: 400 }
+    );
+  }
+
   const videoData = {
-    ...body,
-    controls: body?.controls ?? true,
+    title,
+    description,
+    videoUrl,
+    thumbnailUrl,
+    controls: controls ?? true,
     transformation: {
-           height:body.transformation?.height ?? 1920,
-           width: body.transformation?.width ?? 1080,
-           quality: body.transformation?.quality ?? 100
+           height:transformation?.height ?? 1920,
+           width: transformation?.width ?? 1080,
+           quality: transformation?.quality ?? 100
     },
   };
  const newVideo = await Video.create(videoData)

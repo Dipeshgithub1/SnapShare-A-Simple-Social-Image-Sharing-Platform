@@ -1,11 +1,9 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import { NextAuthOptions } from "next-auth";
 import Email from "next-auth/providers/email";
-import { connect } from "http2";
 import { connectToDatabase } from "./db";
 import User from "@/models/User";
 import bcrypt from "bcryptjs";
-import { Session } from "inspector/promises";
 
 export const authOptions: NextAuthOptions = {
 
@@ -27,7 +25,7 @@ export const authOptions: NextAuthOptions = {
           email: credentials.email
         });
         if(!user){
-          throw new Error("No user found with this email")
+          throw new Error("Invalid credentials")
         }
 
        const isValid = await bcrypt.compare(
@@ -36,7 +34,7 @@ export const authOptions: NextAuthOptions = {
         )
 
         if(!isValid){
-          throw new Error("Invalid password")
+          throw new Error("Invalid credentials")
         }
         return {
           id:user._id.toString(),

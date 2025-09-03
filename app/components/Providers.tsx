@@ -1,14 +1,14 @@
 
 "use client"
-import { ImageKitProvider } from "@imagekit/next"
+import { ImageKitProvider } from "@imagekit/react";
 import { SessionProvider } from "next-auth/react"
 import React from "react"
 import { NotificationProvider } from "./Notification"; // Import NotificationProvider
 
-const urlEndPoint = process.env.NEXT_PUBLIC_URL_ENDPOINT!;
+const urlEndPoint = process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT!;
 
 if(!urlEndPoint){
-    throw new Error("Missing Next_pUblic_URL_ENDPOINT IN.env")
+    throw new Error("Missing NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT in .env")
 }
 
 

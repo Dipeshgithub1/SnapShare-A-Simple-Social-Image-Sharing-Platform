@@ -64,9 +64,9 @@ MONGODB_URI=your_mongodb_connection_string
 NEXTAUTH_SECRET=your_auth_secret
 NEXTAUTH_URL=http://localhost:3000
 
-IMAGEKIT_PUBLIC_KEY=your_public_key
 IMAGEKIT_PRIVATE_KEY=your_private_key
-IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your_imagekit_id/
+NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your_imagekit_id/
+NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY=your_public_key
 📚 Useful Resources
 📘 Next.js Documentation
 

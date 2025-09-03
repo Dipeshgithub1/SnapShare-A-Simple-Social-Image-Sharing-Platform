@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { useNotification } from "./Notification";
 import { Home, User,Sun,Moon } from "lucide-react";
+import Image from 'next/image';
 import { useEffect, useState } from "react";
 
 
@@ -81,7 +82,7 @@ export default function Header(){
           <button tabIndex={0} className="btn btn-ghost btn-circle avatar focus:outline-none">
             {session?.user?.image ? (
               <span className="w-8 h-8 rounded-full overflow-hidden border-2 border-indigo-500 dark:border-[#a786df]">
-                <img src={session.user.image} alt="profile" className="w-full h-full object-cover" />
+                <Image src={session.user.image} alt="profile" width={32} height={32} className="w-full h-full object-cover" />
               </span>
             ) : (
               <User className="w-5 h-5" />

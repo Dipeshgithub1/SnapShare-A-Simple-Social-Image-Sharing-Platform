@@ -55,7 +55,7 @@ const FileUpload = ({ onSuccess, onProgress, fileType }: FileUploadProps) => {
       const res = await upload({
         file,
         fileName: file.name,
-        publicKey: process.env.NEXT_PUBLIC_PUBLIC_KEY!,
+        publicKey: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY!,
         signature: auth.signature,
         expire: auth.expire,
         token: auth.token,
