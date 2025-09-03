@@ -1,3 +1,16 @@
+
+
+
+
+
+https://github.com/user-attachments/assets/b1fe11c2-db9f-495e-aed1-3db9a805cf28
+
+
+
+
+
+
+
 # 📸 SnapShare – Social Image Sharing App
 
 **SnapShare** is a simple social image-sharing web app where users can sign in, upload images, and view posts shared by others. It's built with **Next.js App Router**, **MongoDB**, **NextAuth**, and **ImageKit**.
@@ -28,7 +41,6 @@
 
 First, install dependencies:
 
-```bash
 npm install
 Then, run the development server:
 
