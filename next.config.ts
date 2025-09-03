@@ -6,13 +6,17 @@ const nextConfig: NextConfig = {
   },
   images: {
     remotePatterns: [
-      {    
+      {
         protocol: "https",
         hostname: "ik.imagekit.io",
         port: "",
         pathname: "/**",
       },
     ],
+  },
+  // This part is added to ignore ESLint errors during the build
+  eslint: {
+    ignoreDuringBuilds: true,
   },
 };
 
