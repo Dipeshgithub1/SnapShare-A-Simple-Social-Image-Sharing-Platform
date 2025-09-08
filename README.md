@@ -77,6 +77,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 
 🙌 Author
-Made with ❤️ by Dipesh Kumar
+Made with ❤️ by Dipesh
 
 Just say the word!
