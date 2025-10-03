@@ -2,7 +2,7 @@ import { IVideo } from "@/models/Video";
 import VideoComponent from "@/app/components/VideoComponent";
 
 interface VideoPageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export default async function VideoPage({ params }: VideoPageProps) {

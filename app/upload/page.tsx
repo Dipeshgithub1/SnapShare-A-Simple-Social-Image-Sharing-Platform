@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import VideoUploadForm from "../components/VideoUploadForm";
 
