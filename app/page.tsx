@@ -3,15 +3,17 @@ import VideoFeed from "./components/VideoFeed";
 import { IVideo } from "@/models/Video";
 
 export default async function Home() {
-  let videos: IVideo[] = [];
+  let items: IVideo[] = [];
   try {
-    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/video`, {
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
+    // Use relative URL to avoid slow external resolution and leverage Next's internal fetch cache.
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/video?page=1&limit=20`, {
+      next: { revalidate: 60 },
     });
     if (!res.ok) {
       throw new Error("Failed to fetch videos");
     }
-    videos = await res.json();
+    const data = await res.json();
+    items = data?.items || [];
   } catch (error) {
     console.error("Error fetching videos:", error);
   }
@@ -22,7 +24,7 @@ export default async function Home() {
         <h1 className="text-5xl font-extrabold text-white mb-4 leading-tight">All Reels</h1>
         <p className="text-lg text-gray-200">Explore a world of captivating videos and share your own!</p>
       </div>
-      <VideoFeed videos={videos} />
+      <VideoFeed videos={items} />
     </div>
   );
 }

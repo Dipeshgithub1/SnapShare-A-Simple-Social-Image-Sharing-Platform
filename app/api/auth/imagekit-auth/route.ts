@@ -27,7 +27,7 @@ export async function GET() {
         console.error("ImageKit auth error:", error);
     return Response.json(
         {
-         error: "Authentication fot Imagekit failed",
+         error: "Authentication foound Imagekit failed",
         },
         { status: 500});
     }

@@ -5,11 +5,31 @@ import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 
-export async function GET(){
+export async function GET(request: NextRequest){
     try {
         await connectToDatabase();
-     const videos =  await Video.find({}).sort({createdAt: -1 }).lean()
-        return NextResponse.json( videos || [],{status: 200})
+        const { searchParams } = new URL(request.url);
+        const page = Math.max(parseInt(searchParams.get('page') || '1', 10), 1);
+        const limit = Math.min(Math.max(parseInt(searchParams.get('limit') || '20', 10), 1), 100);
+        const skip = (page - 1) * limit;
+
+        const [items, total] = await Promise.all([
+          Video.find({}, { title: 1, description: 1, thumbnailUrl: 1, videoUrl: 1, createdAt: 1 })
+            .sort({createdAt: -1 })
+            .skip(skip)
+            .limit(limit)
+            .lean(),
+          Video.countDocuments({})
+        ]);
+
+        const totalPages = Math.ceil(total / limit) || 1;
+        return NextResponse.json({
+          items: items || [],
+          page,
+          limit,
+          total,
+          totalPages,
+        }, {status: 200})
            
     } catch (error) {
         return NextResponse.json(

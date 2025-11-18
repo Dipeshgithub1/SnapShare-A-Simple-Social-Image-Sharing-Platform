@@ -20,11 +20,9 @@ export default function VideoComponent({
 
   const isImageKitVideoTransformed = finalThumbnailUrl?.includes("ik.imagekit.io") && finalThumbnailUrl?.includes("?tr=f-image");
 
-  console.log("VideoComponent - finalThumbnailUrl:", finalThumbnailUrl);
-  console.log("VideoComponent - videoUrl:", videoUrl);
   return (
     <div className="bg-[#232946] dark:bg-[#232946] rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-[#232946] dark:border-[#232946]">
-      <Link href={`/video/${_id}`} className="block">
+      <Link href={`/video/${_id}`} className="block" prefetch>
         <div className="relative w-full aspect-video bg-[#181825] dark:bg-[#181825]">
           {finalThumbnailUrl && !showVideoFallback ? (
             isImageKitVideoTransformed ? (

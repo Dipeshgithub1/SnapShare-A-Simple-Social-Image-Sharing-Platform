@@ -1,12 +1,13 @@
 import { connectToDatabase } from "@/lib/db";
-import { error } from "console";
 import { NextRequest,NextResponse } from "next/server";
 import User from "@/models/User";
-import bcrypt from "bcryptjs";
 
 export async function POST(request: NextRequest){
     try {
-    const {email,password} =   await request.json();
+    const body = await request.json();
+    const rawEmail = typeof body?.email === 'string' ? body.email : '';
+    const password = typeof body?.password === 'string' ? body.password : '';
+    const email = rawEmail.trim().toLowerCase();
 
     if(!email || !password){
         return NextResponse.json(
@@ -64,21 +65,16 @@ export async function POST(request: NextRequest){
         {status: 400})
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    await User.create({
-        email,
-        password: hashedPassword,
-    })
+    // Do not hash here; the User model pre-save hook will hash the password.
+    await User.create({ email, password })
     return NextResponse.json(
         {message: "User registered successfully"},
-        {status: 400})
+        {status: 201})
 
     } catch (error) {
         console.error("Error registering user:",error)
         return NextResponse.json(
         {error: "Failed to register user"},
-        {status:400})
-        
+        {status:500})
     }
 }

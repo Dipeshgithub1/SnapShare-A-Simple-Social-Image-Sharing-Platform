@@ -2,16 +2,16 @@ import { IVideo } from "@/models/Video";
 import VideoComponent from "@/app/components/VideoComponent";
 
 interface VideoPageProps {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }
 
 export default async function VideoPage({ params }: VideoPageProps) {
-  const { id } = await params;
+  const { id } = params;
   let video: IVideo | null = null;
 
   try {
     const res = await fetch(`${process.env.NEXTAUTH_URL}/api/video/${id}`, {
-      cache: "no-store",
+      next: { revalidate: 30 },
     });
 
     if (!res.ok) {

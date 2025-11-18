@@ -39,6 +39,9 @@ const videoSchema = new Schema<IVideo>(
 }
     );
 
+// Index recent-first queries for faster sorting and pagination
+videoSchema.index({ createdAt: -1 });
+
     const Video = models?.Video || model<IVideo>("Video",videoSchema);
 
     export default Video;
